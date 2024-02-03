@@ -1,3 +1,31 @@
 1. '-e .'
 --> In the context of Python and modular coding, the -e . is used when installing a package in "editable" mode. 
 This is often done during development to allow changes to the code in the package to take effect immediately without reinstalling the package each time.
+
+2. setup.py
+--> this file contains several libraries and initial setup for package installations
+--> this is the initial process to do in modular programmming
+ a. __init__.py 
+ --> this must be created whenever we create any folder to initialize that folder
+
+3. src/ components
+--> this file contains python files namely modules we specifically going to used in the projects
+
+4. src/ components/ data_ingestion.py
+--> this file used to loading dataset from locally or from various sources
+--> here also use train test split, validations etc..
+
+5. src/ components/ data_transformation.py
+--> this file is used for feature engineering like encoding, converting words into numerical classes
+
+6. src/ components/ model_trainer.py
+---> model trraining
+
+7.src/components/ pipeline
+--> this folder contain 2 file means, training pipeline and predict pipeline
+--> train pipeline used to trigger all the files in the components folder
+
+8 src / components/loggers.py
+--> in this folder create logger.py - Logging is crucial for capturing information about the execution of your code, debugging, and monitoring. 
+
+9. src/ components / 
