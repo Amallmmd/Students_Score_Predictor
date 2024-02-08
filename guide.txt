@@ -28,4 +28,9 @@ This is often done during development to allow changes to the code in the packag
 8 src / components/loggers.py
 --> in this folder create logger.py - Logging is crucial for capturing information about the execution of your code, debugging, and monitoring. 
 
-9. src/ components / 
+10. @dataclass inside data_ingestion.py
+--> this decorator helpful for defining class without defining methods like __init__
+--> this is importing from dataclass
+--> if we are defining only variable, then we can define @dataclass, when we use other methods, go without @dataclass
+
+11. 
