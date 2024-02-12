@@ -7,6 +7,7 @@ import pandas as pd
 from dataclasses import dataclass
 from pathlib import Path
 from sklearn.model_selection import train_test_split
+from src.components.data_transformation import DataTransformation, DataTransformationConfig
 
 @dataclass
 class DataInjestionConfig:
@@ -49,4 +50,6 @@ class DataInjestion:
             raise CustomException(e,sys)
 if __name__ == '__main__':
     obj = DataInjestion()
-    obj.inilializing_ingestion()
+    train_data,test_data =  obj.inilializing_ingestion() # when initiating this method using obj it will return train data and test data
+    data_transformations = DataTransformation()
+    data_transformations.initiate_data_transformation(train_data,test_data)
