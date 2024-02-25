@@ -3,7 +3,7 @@
 # Modelling
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
-
+from sklearn.model_selection import GridSearchCV,RandomizedSearchCV
 from sklearn.ensemble import RandomForestRegressor,AdaBoostRegressor, GradientBoostingRegressor
 from sklearn.svm import SVR
 from sklearn.linear_model import LinearRegression, Ridge,Lasso
@@ -44,8 +44,42 @@ class ModelTrainer:
                 'Decision Tree':DecisionTreeRegressor(),
                 'XGboost':XGBRegressor(),
 
+
             }
-            model_result:dict = evaluate(xtrain=xtrain,ytrain=ytrain,xtest=xtest,ytest=ytest,models=models)
+            param_grid = {
+            'Random forest': {
+                'n_estimators': [50, 100, 200],
+                'max_depth': [None, 10, 20],
+                'min_samples_split': [2, 5, 10]
+            },
+            'Ada boost': {
+                'n_estimators': [50, 100, 200],
+                'learning_rate': [0.01, 0.1, 1.0]
+            },
+            'Gradient Boost': {
+                'n_estimators': [50, 100, 200],
+                'learning_rate': [0.01, 0.1, 1.0],
+                'max_depth': [3, 5, 10]
+            },
+            'Linear Regression': {
+                'fit_intercept': [True, False]
+            },
+            'KNN': {
+                'n_neighbors': [3, 5, 7],
+                'weights': ['uniform', 'distance']
+            },
+            'Decision Tree': {
+                'max_depth': [None, 10, 20],
+                'min_samples_split': [2, 5, 10]
+            },
+            'XGboost': {
+                'n_estimators': [50, 100, 200],
+                'learning_rate': [0.01, 0.1, 1.0],
+                'max_depth': [3, 5, 10]
+            }
+        }
+
+            model_result:dict = evaluate(xtrain=xtrain,ytrain=ytrain,xtest=xtest,ytest=ytest,models=models,param_grid=param_grid)
             best_model_score = max(sorted(model_result.values()))
             best_model_name = list(model_result.keys())[
                 list(model_result.values()).index(best_model_score)
@@ -60,7 +94,7 @@ class ModelTrainer:
             )
             predicted = best_model.predict(xtest)
             r2_square = r2_score(ytest,predicted)
-            
+
             return r2_square
         except Exception as e:
             raise CustomException(e,sys)

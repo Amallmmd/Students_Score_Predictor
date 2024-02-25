@@ -81,7 +81,8 @@ class DataTransformation:
             logging.info('Obtaining preprocessin object')
             preprocessin_obj = self.data_transformation_obj()
             target_column = 'math_score'
-            numerical_columns = ['reading_score','writing_score']
+            numerical_columns = ['writing_score','reading_score']
+
             inputing_train_features = train_df.drop(columns=[target_column],axis=1)
             
             target_train_features = train_df[target_column]
