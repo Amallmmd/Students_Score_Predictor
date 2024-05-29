@@ -12,21 +12,24 @@ def welcome():
 
 @app.route('/predict_data',methods=['GET','POST'])
 def predict_data_section():
-    data = CustomData(
-        gender = request.form.get('gender'),
-        race_ethnicity = request.form.get('race_ethnicity'),
-        parental_level_of_education = request.form.get('parental_level_of_education'),
-        lunch = request.form.get('lunch'),
-        test_preparation_course = request.form.get('test_preparation_course'),
-        writing_score = request.form.get('writing_score'),
-        reading_score = request.form.get('reading_score'),
-        
-    )
-    predict_df = data.getdata_as_dataframe()
-    print(predict_df)
+    if request.method == 'GET':
+        return render_template('home.html')
+    else:
+        data = CustomData(
+            gender = request.form.get('gender'),
+            race_ethnicity = request.form.get('race_ethnicity'),
+            parental_level_of_education = request.form.get('parental_level_of_education'),
+            lunch = request.form.get('lunch'),
+            test_preparation_course = request.form.get('test_preparation_course'),
+            writing_score = request.form.get('writing_score'),
+            reading_score = request.form.get('reading_score'),
 
-    pred_pipeline = PredictPipeline()
-    result = pred_pipeline.predict(features=predict_df)
-    return render_template('home.html',result = result[0])
+        )
+        predict_df = data.getdata_as_dataframe()
+        print(predict_df)
+
+        pred_pipeline = PredictPipeline()
+        result = pred_pipeline.predict(features=predict_df)
+        return render_template('home.html',result = result[0])
 if __name__=='__main__':
     app.run(debug=True)
