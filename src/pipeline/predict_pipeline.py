@@ -10,14 +10,23 @@ class PredictPipeline:
         pass
     def predict(self,features):
         try:
-            model_path = os.path.join('artifacts/model.pkl')
-            preprocessor_path = os.path.join('artifacts/preprocessor.pkl')
-            model = load_object(filename=model_path)
+            model_path = os.path.join("artifacts", "model.pkl")
+            preprocessor_path = os.path.join('artifacts', 'preprocessor.pkl')
 
+            logging.info(f'Loading model from {model_path}')
+            model = load_object(filename=model_path)
+            logging.info('Model loaded successfully')
+
+            logging.info(f'Loading preprocessor from {preprocessor_path}')
             preprocessor = load_object(filename=preprocessor_path)
+            logging.info('Preprocessor loaded successfully')
+
             logging.info(f'Feature shape: {features.shape}')
             scaled_data = preprocessor.transform(features)
+            logging.info(f'Scaled data: {scaled_data}')
+
             preds = model.predict(scaled_data)
+            logging.info(f'Predictions: {preds}')
             return preds
         except Exception as e:
             raise CustomException(e,sys)

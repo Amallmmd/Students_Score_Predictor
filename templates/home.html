@@ -1,4 +1,131 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Student Score Predictor</h1>
+        <p class="lead">Enter the details below to predict mark.</p>
+
+        <form action="{{ url_for('predict_data_section')}}" method="post">
+            <div class="form-group">
+                <label for="Type">Gender</label>
+                <select class="form-control" name="gender" placeholder="Enter you Gender" required>
+                    <option class="placeholder" selected disabled value="">Select your Gender</option>
+                    <option value="male">
+                        Male
+                    </option>
+                    <option value="female">
+                        Female
+                    </option>
+                </select>
+                <!-- <input type="text" class="form-control" id="Type" name="Type" required> -->
+            </div>
+            <div class="form-group">
+                <label for="Air_temperature_K">Race or Ethnicity</label>
+                <select class="form-control" name="ethnicity" placeholder="Enter you ethnicity" required>
+                    <option class="placeholder" selected disabled value="">Select Ethnicity</option>
+                    <option value="group A">
+                        Group A
+                    </option>
+                    <option value="group B">
+                        Group B
+                    </option>
+                    <option value="group C">
+                        Group C
+                    </option>
+                    <option value="group D">
+                        Group D
+                    </option>
+                    <option value="group E">
+                        Group E
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Process_temperature_K">Parental Level of Education</label>
+                <select class="form-control" name="parental_level_of_education"
+                placeholder="Enter you Parent Education" required>
+                <option class="placeholder" selected disabled value="">Select Parent Education</option>
+                <option value="associate's degree">
+                    associate's degree
+                </option>
+                <option value="bachelor's degree">
+                    bachelor's degree
+                </option>
+                <option value="high school">
+                    high school
+                </option>
+                <option value="master's degree">
+                    master's degree
+                </option>
+                <option value="some college">
+                    some college
+                </option>
+                <option value="some high school">
+                    some high school
+                </option>
+            </select>
+                <!-- <input type="number" class="form-control" id="Process_temperature_K" name="Process_temperature_K" step="any" required> -->
+            </div>
+            <div class="form-group">
+                <label for="Rotational_speed_rpm">Lunch Type</label>
+                <!-- <input type="number" class="form-control" id="Rotational_speed_rpm" name="Rotational_speed_rpm" required> -->
+                <select class="form-control" name="lunch" placeholder="Enter you Lunch" required>
+                    <option class="placeholder" selected disabled value="">Select Lunch Type</option>
+                    <option value="free/reduced">
+                        free/subsidized
+                    </option>
+                    <option value="standard">
+                        standard
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Torque_Nm">Test preparation Course</label>
+                <input type="text" class="form-control" id="Torque_Nm" name="Torque_Nm" step="any" required>
+                <select class="form-control" name="test_preparation_course" placeholder="Enter you Course"
+                required>
+                <option class="placeholder" selected disabled value="">Test Status</option>
+                <option value="none">
+                    None
+                </option>
+                <option value="completed">
+                    Completed
+                </option>
+            </select>
+            </div>
+            <div class="form-group">
+                <label for="Tool_wear_min">Writing Score out of 100</label>
+                <input type="number" class="form-control" id="Tool_wear_min" name="Tool_wear_min" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="Tool_wear_min">Reading Score out of 100</label>
+                <input type="number" class="form-control" id="Tool_wear_min" name="Tool_wear_min" step="any" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        {% if results %}
+            <div class="alert alert-success mt-4" role="alert">
+                THE prediction is {{results}}
+                <!-- {{ results }} -->
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+
+<!-- <html>
 <body>
     <div class="login">
        <h1>Student Exam Performance Indicator</h1>
@@ -108,4 +235,4 @@
        THE  prediction is {{results}}
     </h2>
    <body>
-</html>
+</html> -->
