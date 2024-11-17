@@ -1,7 +1,6 @@
 from flask import Flask,url_for,redirect,request,render_template
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 
-
 application = Flask(__name__)
 
 app = application
@@ -30,6 +29,7 @@ def predict_data_section():
 
         pred_pipeline = PredictPipeline()
         result = pred_pipeline.predict(features=predict_df)
-        return render_template('home.html',result = result[0])
+        print(f"Accuracy: {result}")
+        return render_template('output.html',result = result[0])
 if __name__=='__main__':
     app.run(debug=True)
